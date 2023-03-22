@@ -43,22 +43,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
       ),
       home: const BottomPart(),
-
-      // home: FutureBuilder(
-      //   future: _fbApp,
-      //   builder: (context, snapshot){
-      //     if(snapshot.hasError){
-      //       print("You have an error! ${snapshot.error.toString()}");
-      //       return const Text("something went wrong!");
-      //     }else if(snapshot.hasData){
-      //       return const MyHomePage(bar_title: 'flutter');
-      //     }else{
-      //       return const Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     }
-      //   },
-      // ),
       debugShowCheckedModeBanner: false,
     );
   }

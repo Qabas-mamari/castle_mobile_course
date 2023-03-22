@@ -18,6 +18,9 @@ class DatabaseHelper{
     }
   }
 
+  //static --> no need to create objects
+  //flutter run --> to run the flutter project
+  //
   static void ReadDataFirebaseRealtime(Function(List<Castle>)castleListCallback ) {
     DatabaseReference dbRef = FirebaseDatabase.instance.ref();
 

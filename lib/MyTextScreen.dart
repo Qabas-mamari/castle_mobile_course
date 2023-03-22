@@ -1,3 +1,4 @@
+import 'package:castle_mobile_course/Data/DatabaseHelper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -5,6 +6,8 @@ import 'package:castle_mobile_course/reuseableCode/AppFortDecoration.dart';
 import 'package:castle_mobile_course/reuseableCode/AppRowData.dart';
 import 'package:castle_mobile_course/reuseableCode/AppStyles.dart';
 import 'package:castle_mobile_course/Data/app_info_list.dart.txt';
+
+import 'Data/castle_model.dart';
 
 class MyTextScreen extends StatefulWidget {
   const MyTextScreen({Key? key}) : super(key: key);
@@ -14,6 +17,17 @@ class MyTextScreen extends StatefulWidget {
 }
 
 class _MyTextScreenState extends State<MyTextScreen> {
+  List<Castle> castleList = [];
+
+  @override
+  void initState(){
+    super.initState();
+    DatabaseHelper.ReadDataFirebaseRealtime((castle) {
+      setState(() {
+        this.castleList = castleList;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
