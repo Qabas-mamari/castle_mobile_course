@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "208492430661",
+    "project_id": "castle-project-88448",
+    "storage_bucket": "castle-project-88448.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208492430661:android:165ef3b3a63dc7a609ea2c",
+        "android_client_info": {
+          "package_name": "com.example.castle_mobile_course"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208492430661-pfpnm16k3jd672cbvp6pvtmfrcld5bgc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAofYBNUTbYluhgnUEyF0aOeon6bV3KCeY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "208492430661-pfpnm16k3jd672cbvp6pvtmfrcld5bgc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
