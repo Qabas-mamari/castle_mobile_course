@@ -111,8 +111,11 @@ class _MyTextScreenState extends State<MyTextScreen> {
                  SingleChildScrollView(
                    scrollDirection: Axis.horizontal,
                   child: Row(
-                    children:
-                      fortList.map((castle)=>AppFortDecoration(fort: castle,)).toList(),
+                    children:[
+                      for(int i=0; i<castleList.length; i++)
+                          AppFortDecoration(castle: castleList[i])
+                    ],
+                    //  fortList.map((castle)=>AppFortDecoration(fort: castle,)).toList(),
 
                   )
                 ),

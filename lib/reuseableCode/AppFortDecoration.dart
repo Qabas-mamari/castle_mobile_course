@@ -1,12 +1,13 @@
+import 'package:castle_mobile_course/Data/castle_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'AppStyles.dart';
 import 'AppStyles.dart';
 
 class AppFortDecoration extends StatelessWidget {
-  final Map<String, dynamic> fort;
+  final Castle castle;
 
-  const AppFortDecoration({Key? key, required this.fort}) : super(key: key);
+  const AppFortDecoration({Key? key, required this.castle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
