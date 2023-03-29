@@ -9,6 +9,7 @@ import 'package:firebase_database/firebase_database.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseDatabase.instance.setPersistenceEnabled(true);
   //DatabaseReference dbRef = FirebaseDatabase.instance.ref();
 
   // if(fortList.isNotEmpty){

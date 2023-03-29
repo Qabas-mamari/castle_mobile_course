@@ -24,10 +24,11 @@ class _MyTextScreenState extends State<MyTextScreen> {
     super.initState();
     DatabaseHelper.ReadDataFirebaseRealtime((castle) {
       setState(() {
-        this.castleList = castleList;
+        this.castleList = castle;
       });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

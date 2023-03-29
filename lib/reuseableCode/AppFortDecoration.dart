@@ -2,7 +2,7 @@ import 'package:castle_mobile_course/Data/castle_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'AppStyles.dart';
-import 'AppStyles.dart';
+
 
 class AppFortDecoration extends StatelessWidget {
   final Castle castle;
@@ -29,7 +29,7 @@ class AppFortDecoration extends StatelessWidget {
 
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                        image: AssetImage("assets/img/${fort['image']}"),
+                        image: AssetImage("assets/img/${castle.castleData!.image.toString()}"),
                     ),
                   border: Border.all(width: 5, color: Colors.brown.shade200),
                   boxShadow:   [
@@ -63,9 +63,9 @@ class AppFortDecoration extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children:  [
-                          Text(fort["name"], style: AppStyles.textStyle1,),
-                          Text(fort["place"], style: AppStyles.textStyle1,),
-                          Text(fort["established"].toString(), style: AppStyles.textStyle1,),
+                          Text(castle.castleData!.name.toString(), style: AppStyles.textStyle1,),
+                          Text(castle.castleData!.place.toString(), style: AppStyles.textStyle1,),
+                          Text(castle.castleData!.image.toString(), style: AppStyles.textStyle1,),
                         ],),
                     ],
                   ),
