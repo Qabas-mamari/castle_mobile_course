@@ -1,8 +1,9 @@
+import 'package:castle_mobile_course/Screens/AddNewCastleDataToFirebase.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:castle_mobile_course/MyImageList.dart';
-import 'package:castle_mobile_course/MyTextScreen.dart';
+import 'package:castle_mobile_course/Screens/MyImageList.dart';
+import 'package:castle_mobile_course/Screens/MyTextScreen.dart';
 
 class BottomPart extends StatefulWidget {
   const BottomPart({Key? key}) : super(key: key);
@@ -18,9 +19,7 @@ class _BottomPartState extends State<BottomPart> {
    // const Text("Text"),
     const MyTextScreen(),
     const MyImageList(),
-    const Text("Images"),
-    const Text("Videos"),
-    const Text("Audio"),
+    AddNewCastleDataToFirebase(),
 
   ];
   @override
@@ -42,6 +41,11 @@ class _BottomPartState extends State<BottomPart> {
             icon: Icon(FluentSystemIcons.ic_fluent_image_add_regular),
             activeIcon: Icon(FluentSystemIcons.ic_fluent_image_add_regular),
             label: "textList",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FluentSystemIcons.ic_fluent_image_add_filled),
+            label: "add Castle"
+
           )
         ],
       ),

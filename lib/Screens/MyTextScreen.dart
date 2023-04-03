@@ -7,7 +7,7 @@ import 'package:castle_mobile_course/reuseableCode/AppRowData.dart';
 import 'package:castle_mobile_course/reuseableCode/AppStyles.dart';
 import 'package:castle_mobile_course/Data/app_info_list.dart.txt';
 
-import 'Data/castle_model.dart';
+import '../Data/castle_model.dart';
 
 class MyTextScreen extends StatefulWidget {
   const MyTextScreen({Key? key}) : super(key: key);

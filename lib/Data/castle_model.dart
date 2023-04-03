@@ -16,12 +16,24 @@ class CastleData{
 
   CastleData(this.image, this.name, this.place, this.yearEstablished, this.ticketPrice);
 
+  //read data from firebase
   CastleData.fromJson(Map<dynamic, dynamic> json){
     image = json["image"];
     name = json["name"];
     place = json["place"];
     yearEstablished = checkInteger(json["established"]);
     ticketPrice = checkDouble(json["ticket_price"]);
+  }
+
+  //read data to firebase
+  Map<String, dynamic> toJson(){
+    return {
+      "image": image,
+      "name": name,
+      "place": place,
+      "established": yearEstablished,
+      "ticket_price": ticketPrice
+    };
   }
 
   int? checkInteger(established){

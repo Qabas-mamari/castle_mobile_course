@@ -43,5 +43,12 @@ class DatabaseHelper{
     });
   }
 
+  static Future<void> savedDataItem(CastleData castleData){
+    DatabaseReference df = FirebaseDatabase.instance.ref();
+    return df.child("Castle3").push().set(castleData.toJson())
+        .then((value) => print("Castle data saved successfully"))
+        .catchError((error)=> print("Failed to save Castle data : $error"));
+  }
+
 
 }
