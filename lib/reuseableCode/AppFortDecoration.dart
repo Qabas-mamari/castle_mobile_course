@@ -41,7 +41,6 @@ class AppFortDecoration extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Container(
-
                 height: 110,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),

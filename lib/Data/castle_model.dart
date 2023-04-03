@@ -10,18 +10,18 @@ class CastleData{
   String? image;
   String? name;
   String?place;
-  int? established;
-  double? ticket_price;
+  int? yearEstablished;
+  double? ticketPrice;
 
 
-  CastleData(this.image, this.name, this.place, this.established, this.ticket_price);
+  CastleData(this.image, this.name, this.place, this.yearEstablished, this.ticketPrice);
 
   CastleData.fromJson(Map<dynamic, dynamic> json){
     image = json["image"];
     name = json["name"];
     place = json["place"];
-    established = checkInteger(json["established"]);
-    ticket_price = checkDouble(json["ticket_price"]);
+    yearEstablished = checkInteger(json["established"]);
+    ticketPrice = checkDouble(json["ticket_price"]);
   }
 
   int? checkInteger(established){

@@ -117,7 +117,6 @@ class _MyTextScreenState extends State<MyTextScreen> {
                           AppFortDecoration(castle: castleList[i])
                     ],
                     //  fortList.map((castle)=>AppFortDecoration(fort: castle,)).toList(),
-
                   )
                 ),
               ],
