@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: const BottomPart(),
+      home: const BottomPart(
+          onUpdateCastle: (Castle, bool){}
+      ),
       //the yellow line in the top 
       debugShowCheckedModeBanner: false,
     );

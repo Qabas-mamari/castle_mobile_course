@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AddNewCastleDataToFirebase extends StatelessWidget{
+  final Castle? castle;
+  final bool isUpdate;
+  final void Function(Castle castle, bool isUpdate) onUpdateCastle;
+
+
   final nameController = TextEditingController();
   final imagePathController = TextEditingController();
   final placeController = TextEditingController();
@@ -13,10 +18,18 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
 
   final GlobalKey<ScaffoldMessengerState> _scafoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
-  AddNewCastleDataToFirebase({super.key});
+  AddNewCastleDataToFirebase({super.key, this.castle,  this.isUpdate =false, required this.onUpdateCastle});
 
   @override
   Widget build(BuildContext context) {
+    if(isUpdate && castle != null){
+      nameController.text = castle!.castleData!.name ?? "";
+      imagePathController.text = castle!.castleData!.image ?? "";
+      placeController.text = castle!.castleData!.place ?? "";
+      yearEstablishedController.text = castle!.castleData!.yearEstablished.toString() ?? "";
+      ticketPriceController.text = castle!.castleData!.toString() ?? "" ;
+
+    }
     return MaterialApp(
       title: 'Flutter Firebase Create Demo',
       home: ScaffoldMessenger(
@@ -63,6 +76,17 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
                           int.parse(yearEstablishedController.text),
                           double.parse(ticketPriceController.text)
                         );
+                        if(isUpdate && castle !=null){
+                          DatabaseHelper.updateCastleData(castle!.key!, castleData)
+                              .then((_) =>{ _scafoldMessengerKey.currentState?.showSnackBar(const SnackBar(
+                            content: Text(
+                              "Data update successfully",
+                              textAlign: TextAlign.center,
+                            ),
+                            backgroundColor: Colors.green,
+                          ))
+                          )
+                        }
                         DatabaseHelper.savedDataItem(castleData).then((_){
                           _scafoldMessengerKey.currentState?.showSnackBar(
                             const SnackBar(

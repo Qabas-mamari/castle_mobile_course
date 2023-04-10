@@ -5,8 +5,7 @@ class DatabaseHelper{
 
   static void createDataFirebaseRealtimeWithUniqueID(
       String mainNodeName, List<Map<String, dynamic>> fortList) {
-    DatabaseReference databaseReference =
-    FirebaseDatabase.instance.ref(mainNodeName);
+    DatabaseReference databaseReference = FirebaseDatabase.instance.ref(mainNodeName);
     if (fortList.isNotEmpty) {
       fortList.forEach((element) {
         databaseReference.push().set(element)
@@ -48,6 +47,11 @@ class DatabaseHelper{
     return df.child("Castle3").push().set(castleData.toJson())
         .then((value) => print("Castle data saved successfully"))
         .catchError((error)=> print("Failed to save Castle data : $error"));
+  }
+
+  static Future<void> updateCastleData(String key, CastleData castleData) async {
+    DatabaseReference df = FirebaseDatabase.instance.ref();
+    await df.child("Castle3").child(key).update(castleData.toJson());
   }
 
 

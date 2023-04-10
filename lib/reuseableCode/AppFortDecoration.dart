@@ -6,15 +6,16 @@ import 'AppStyles.dart';
 
 class AppFortDecoration extends StatelessWidget {
   final Castle castle;
+  final Function (Castle, bool) onUpdateCastle;
 
-  const AppFortDecoration({Key? key, required this.castle}) : super(key: key);
+  const AppFortDecoration({Key? key, required this.castle, required this.onUpdateCastle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return  Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 360,
+        height: 410,
         width: 0.75 * MediaQuery.of(context).size.width,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.brown[300],),
         child: Column(
@@ -46,29 +47,46 @@ class AppFortDecoration extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.brown[200],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:  [
-                          Text("Name", style: AppStyles.textStyle1,),
-                          Text("Place", style: AppStyles.textStyle1,),
-                          Text("Year", style: AppStyles.textStyle1,),
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:  [
+                              Text("Name", style: AppStyles.textStyle1,),
+                              Text("Place", style: AppStyles.textStyle1,),
+                              Text("Year", style: AppStyles.textStyle1,),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children:  [
+                              Text(castle.castleData!.name.toString(), style: AppStyles.textStyle1,),
+                              Text(castle.castleData!.place.toString(), style: AppStyles.textStyle1,),
+                              Text(castle.castleData!.image.toString(), style: AppStyles.textStyle1,),
+                            ],),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children:  [
-                          Text(castle.castleData!.name.toString(), style: AppStyles.textStyle1,),
-                          Text(castle.castleData!.place.toString(), style: AppStyles.textStyle1,),
-                          Text(castle.castleData!.image.toString(), style: AppStyles.textStyle1,),
-                        ],),
-                    ],
-                  ),
 
+                    ),
+                    Positioned(
+                        bottom: 10,
+                        left: 120,
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Colors.blue,
+                          ),
+                          onPressed: (){
+                            onUpdateCastle(castle, true);
+                          },
+                        )
+                    )
+                  ],
                 ),
 
               ),

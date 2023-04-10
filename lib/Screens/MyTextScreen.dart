@@ -10,7 +10,8 @@ import 'package:castle_mobile_course/Data/app_info_list.dart.txt';
 import '../Data/castle_model.dart';
 
 class MyTextScreen extends StatefulWidget {
-  const MyTextScreen({Key? key}) : super(key: key);
+  final Function(Castle, bool) onUpdateCastle;
+  const MyTextScreen({Key? key, required this.onUpdateCastle}) : super(key: key);
 
   @override
   State<MyTextScreen> createState() => _MyTextScreenState();
@@ -114,7 +115,7 @@ class _MyTextScreenState extends State<MyTextScreen> {
                   child: Row(
                     children:[
                       for(int i=0; i<castleList.length; i++)
-                          AppFortDecoration(castle: castleList[i])
+                          AppFortDecoration(castle: castleList[i], onUpdateCastle: widget.onUpdateCastle)
                     ],
                     //  fortList.map((castle)=>AppFortDecoration(fort: castle,)).toList(),
                   )
