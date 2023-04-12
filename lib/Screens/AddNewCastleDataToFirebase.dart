@@ -18,7 +18,10 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
 
   final GlobalKey<ScaffoldMessengerState> _scafoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
-  AddNewCastleDataToFirebase({super.key, this.castle,  this.isUpdate =false, required this.onUpdateCastle});
+  AddNewCastleDataToFirebase({super.key,
+    this.castle,
+    this.isUpdate = false,
+    required this.onUpdateCastle});
 
   @override
   Widget build(BuildContext context) {
@@ -31,30 +34,30 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
 
     }
     return MaterialApp(
-      title: 'Flutter Firebase Create Demo',
+      title: 'Flutter Firebase Create/Update Demo',
       home: ScaffoldMessenger(
         key: _scafoldMessengerKey,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("Flutter Firebase Create Demo"),
+            title: const Text('Flutter Firebase Create/Update Demo'),
           ),
           body: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+                children: <Widget>[
                   TextField(
                     controller: nameController,
                     decoration: const InputDecoration(labelText: 'Name'),
                   ),
                   TextField(
                     controller: imagePathController,
-                    decoration: const InputDecoration(labelText: "Image Path"),
+                    decoration: const InputDecoration(labelText: 'Image Path'),
                   ),
                   TextField(
                     controller: placeController,
-                    decoration: const InputDecoration(labelText: "Place"),
+                    decoration: const InputDecoration(labelText: 'Place'),
                   ),
                   TextField(
                     controller: yearEstablishedController,
@@ -63,47 +66,70 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
                   ),
                   TextField(
                     controller: ticketPriceController,
-                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                    decoration: const InputDecoration(labelText: 'Ticket Price'),
+                    keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                    decoration:
+                    const InputDecoration(labelText: 'Ticket Price'),
                   ),
                   ElevatedButton(
-                      child: const Text("Save"),
-                    onPressed: (){
-                        CastleData castleData = CastleData(
-                          imagePathController.text,
-                          nameController.text,
-                          placeController.text,
-                          int.parse(yearEstablishedController.text),
-                          double.parse(ticketPriceController.text)
-                        );
-                        if(isUpdate && castle !=null){
-                          DatabaseHelper.updateCastleData(castle!.key!, castleData)
-                              .then((_) =>{ _scafoldMessengerKey.currentState?.showSnackBar(const SnackBar(
+                    child: const Text('Save'),
+                    onPressed: () {
+                      CastleData castleData = CastleData(
+                        imagePathController.text,
+                        nameController.text,
+                        placeController.text,
+                        int.parse(yearEstablishedController.text),
+                        double.parse(ticketPriceController.text),
+                      );
+                      if (isUpdate && castle != null) {
+                        DatabaseHelper.updateCastleData(
+                            castle!.key!, castleData)
+                            .then((_) => {
+                          _scafoldMessengerKey.currentState
+                              ?.showSnackBar(const SnackBar(
                             content: Text(
-                              "Data update successfully",
+                              "Data updated successfully",
                               textAlign: TextAlign.center,
                             ),
                             backgroundColor: Colors.green,
                           ))
-                          )
-                        }
-                        DatabaseHelper.savedDataItem(castleData).then((_){
-                          _scafoldMessengerKey.currentState?.showSnackBar(
-                            const SnackBar(
-                                content: Text("Data saved successfully", textAlign: TextAlign.center,),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
-                        }).catchError((error){
+                        })
+                            .catchError((error) {
                           _scafoldMessengerKey.currentState?.showSnackBar(
                             SnackBar(
-                                content: Text('Failed to save data: $error', textAlign: TextAlign.center,),
+                              content: Text(
+                                'Failed to update data: $error',
+                                textAlign: TextAlign.center,
+                              ),
                               backgroundColor: Colors.red,
                             ),
                           );
                         });
+                      } else {
+                        DatabaseHelper.savedDataItem(castleData).then((_) {
+                          _scafoldMessengerKey.currentState?.showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Data saved successfully',
+                                textAlign: TextAlign.center,
+                              ),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                        }).catchError((error) {
+                          _scafoldMessengerKey.currentState?.showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Failed to save data: $error',
+                                textAlign: TextAlign.center,
+                              ),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        });
+                      }
                     },
-                  )
+                  ),
                 ],
               ),
             ),

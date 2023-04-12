@@ -10,48 +10,25 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseDatabase.instance.setPersistenceEnabled(true);
-  runApp(MyApp());
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.green,
       ),
-      home: const BottomPart(
-          onUpdateCastle: (Castle, bool){}
+      home: BottomPart(
+        onUpdateCastle: (Castle, bool) {},
       ),
-      //the yellow line in the top 
       debugShowCheckedModeBanner: false,
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  final String bar_title;
-
-  const MyHomePage({super.key, required this.bar_title});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
   }
 }

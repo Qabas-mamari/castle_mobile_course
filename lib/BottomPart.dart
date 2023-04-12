@@ -88,7 +88,7 @@ class _BottomPartState extends State<BottomPart> {
       if(value == 1){
         _widgetOptions[1] = AddNewCastleDataToFirebase(
             onUpdateCastle: (Castle castle, bool isUpdate){
-              _updateCastle(castle, isUpdate)
+              _updateCastle(castle, isUpdate);
             },
         );
       }
