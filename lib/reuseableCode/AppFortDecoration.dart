@@ -7,8 +7,9 @@ import 'AppStyles.dart';
 class AppFortDecoration extends StatelessWidget {
   final Castle castle;
   final Function (Castle, bool) onUpdateCastle;
+  final Function(String key) onDelete;
 
-  const AppFortDecoration({Key? key, required this.castle, required this.onUpdateCastle}) : super(key: key);
+  const AppFortDecoration({Key? key, required this.castle, required this.onUpdateCastle, required this.onDelete}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class AppFortDecoration extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: Container(
-                height: 200,
+                height: 210,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.yellow,
@@ -42,7 +43,8 @@ class AppFortDecoration extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Container(
-                height: 110,
+                height: 150,
+                width: 0.75 * MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.brown[200],
@@ -67,7 +69,7 @@ class AppFortDecoration extends StatelessWidget {
                             children:  [
                               Text(castle.castleData!.name.toString(), style: AppStyles.textStyle1,),
                               Text(castle.castleData!.place.toString(), style: AppStyles.textStyle1,),
-                              Text(castle.castleData!.image.toString(), style: AppStyles.textStyle1,),
+                              Text(castle.castleData!.yearEstablished.toString(), style: AppStyles.textStyle1,),
                             ],),
                         ],
                       ),
@@ -75,7 +77,7 @@ class AppFortDecoration extends StatelessWidget {
                     ),
                     Positioned(
                         bottom: 10,
-                        left: 120,
+                        left: 130,
                         child: IconButton(
                           icon: const Icon(
                             Icons.edit,
@@ -85,6 +87,17 @@ class AppFortDecoration extends StatelessWidget {
                             onUpdateCastle(castle, true);
                           },
                         )
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      left: 100,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                        onPressed: ()=> onDelete(castle.key!),
+                      ),
                     )
                   ],
                 ),

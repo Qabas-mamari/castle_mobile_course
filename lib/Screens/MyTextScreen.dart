@@ -20,6 +20,30 @@ class MyTextScreen extends StatefulWidget {
 class _MyTextScreenState extends State<MyTextScreen> {
   List<Castle> castleList = [];
 
+  void _handleDeleteCastle(String key) async{
+    try {
+      await DatabaseHelper.deleteCastle(key);
+      setState(() {
+        castleList.removeWhere((castle) => castle.key == key);
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+              "Castle deleted successfully", textAlign: TextAlign.center),
+          backgroundColor: Colors.green,
+        ),
+      );
+    }catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(
+          "Error deleting a castle: ${e.toString()}",
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: Colors.red,
+        )
+      );
+    }
+  }
   @override
   void initState(){
     super.initState();
@@ -115,7 +139,11 @@ class _MyTextScreenState extends State<MyTextScreen> {
                   child: Row(
                     children:[
                       for(int i=0; i<castleList.length; i++)
-                          AppFortDecoration(castle: castleList[i], onUpdateCastle: widget.onUpdateCastle)
+                          AppFortDecoration(
+                              castle: castleList[i],
+                              onUpdateCastle: widget.onUpdateCastle,
+                              onDelete: _handleDeleteCastle
+                          )
                     ],
                     //  fortList.map((castle)=>AppFortDecoration(fort: castle,)).toList(),
                   )

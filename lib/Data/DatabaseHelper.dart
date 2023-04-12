@@ -54,5 +54,8 @@ class DatabaseHelper{
     await df.child("Castle3").child(key).update(castleData.toJson());
   }
 
-
+static Future<void> deleteCastle(String key) async{
+    DatabaseReference df = FirebaseDatabase.instance.ref();
+    await df.child("Castle3").child(key).remove();
+  }
 }
