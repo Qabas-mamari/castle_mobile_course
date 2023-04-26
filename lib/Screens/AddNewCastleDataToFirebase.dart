@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../main.dart';
+import '../reuseableCode/Helper.dart';
+
 class AddNewCastleDataToFirebase extends StatelessWidget{
   final Castle? castle;
   final bool isUpdate;
@@ -84,7 +87,13 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
                       if (isUpdate && castle != null) {
                         DatabaseHelper.updateCastleData(
                             castle!.key!, castleData)
-                            .then((_) => {
+                            .then((_) async => {
+                        await Helper.showNotification(
+                        localNotificationPlugin: flutterLocalNotificationsPlugin,
+                        title: 'Success',
+                        body: 'Castle updated successfully!',
+                        id: 1,
+                        ),
                           _scafoldMessengerKey.currentState
                               ?.showSnackBar(const SnackBar(
                             content: Text(
@@ -92,9 +101,16 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
                               textAlign: TextAlign.center,
                             ),
                             backgroundColor: Colors.green,
-                          ))
+                          )
+                          )
                         })
-                            .catchError((error) {
+                            .catchError((error) async {
+                          await Helper.showNotification(
+                            localNotificationPlugin: flutterLocalNotificationsPlugin,
+                            title: 'Error',
+                            body: 'Error updating a castle: ${error.toString()}',
+                            id: 2,
+                          );
                           _scafoldMessengerKey.currentState?.showSnackBar(
                             SnackBar(
                               content: Text(
@@ -106,7 +122,13 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
                           );
                         });
                       } else {
-                        DatabaseHelper.savedDataItem(castleData).then((_) {
+                        DatabaseHelper.savedDataItem(castleData).then((_) async {
+                          await Helper.showNotification(
+                            localNotificationPlugin: flutterLocalNotificationsPlugin,
+                            title: 'Success',
+                            body: 'Castle saved successfully!',
+                            id: 1,
+                          );
                           _scafoldMessengerKey.currentState?.showSnackBar(
                             const SnackBar(
                               content: Text(
@@ -116,7 +138,13 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
                               backgroundColor: Colors.green,
                             ),
                           );
-                        }).catchError((error) {
+                        }).catchError((error) async {
+                          await Helper.showNotification(
+                            localNotificationPlugin: flutterLocalNotificationsPlugin,
+                            title: 'Error',
+                            body: 'Error saving a castle: ${error.toString()}',
+                            id: 2,
+                          );
                           _scafoldMessengerKey.currentState?.showSnackBar(
                             SnackBar(
                               content: Text(
