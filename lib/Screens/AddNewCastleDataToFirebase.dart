@@ -12,7 +12,7 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
   final bool isUpdate;
   final void Function(Castle castle, bool isUpdate) onUpdateCastle;
 
-
+//comment
   final nameController = TextEditingController();
   final imagePathController = TextEditingController();
   final placeController = TextEditingController();
