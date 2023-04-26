@@ -40,6 +40,7 @@ dependencies:
   gap: ^2.0.0
   firebase_core: ^2.7.1
   firebase_database: ^10.0.15
+  flutter_local_notifications: ^9.3.0
 
 dev_dependencies:
   flutter_test:

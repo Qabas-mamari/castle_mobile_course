@@ -8,6 +8,8 @@ import 'package:castle_mobile_course/reuseableCode/AppStyles.dart';
 import 'package:castle_mobile_course/Data/app_info_list.dart.txt';
 
 import '../Data/castle_model.dart';
+import '../main.dart';
+import '../reuseableCode/Helper.dart';
 
 class MyTextScreen extends StatefulWidget {
   final Function(Castle, bool) onUpdateCastle;
@@ -22,6 +24,12 @@ class _MyTextScreenState extends State<MyTextScreen> {
 
   void _handleDeleteCastle(String key) async{
     try {
+      await Helper.showNotification(
+        localNotificationPlugin: flutterLocalNotificationsPlugin,
+        title: 'Success',
+        body: 'Castle deleted successfully!',
+        id: 1,
+      );
       await DatabaseHelper.deleteCastle(key);
       setState(() {
         castleList.removeWhere((castle) => castle.key == key);
@@ -34,6 +42,12 @@ class _MyTextScreenState extends State<MyTextScreen> {
         ),
       );
     }catch(e){
+      await Helper.showNotification(
+        localNotificationPlugin: flutterLocalNotificationsPlugin,
+        title: 'Error',
+        body: 'Error deleting a castle: ${e.toString()}',
+        id: 2,
+      );
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(
           "Error deleting a castle: ${e.toString()}",
