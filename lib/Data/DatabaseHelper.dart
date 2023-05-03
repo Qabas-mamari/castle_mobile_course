@@ -1,4 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'castle_model.dart';
 
 class DatabaseHelper{
@@ -57,5 +60,21 @@ class DatabaseHelper{
 static Future<void> deleteCastle(String key) async{
     DatabaseReference df = FirebaseDatabase.instance.ref();
     await df.child("Castle3").child(key).remove();
+  }
+
+  static Future<void> sendSMS(String phoneNumber, String message, BuildContext context) async{
+    String smsUrl = "sms: $phoneNumber?body=$message";
+
+    if(await canLaunch(smsUrl)){
+      await launch(smsUrl);
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text(
+          "Faild to send SMS. Please check your device's capablities"
+        ),
+        backgroundColor: Colors.red,
+        )
+      );
+    }
   }
 }

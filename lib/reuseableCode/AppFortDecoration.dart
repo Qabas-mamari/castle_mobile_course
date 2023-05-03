@@ -1,3 +1,4 @@
+import 'package:castle_mobile_course/Data/DatabaseHelper.dart';
 import 'package:castle_mobile_course/Data/castle_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -111,6 +112,19 @@ class AppFortDecoration extends StatelessWidget {
                         onPressed: ()=> onShowMap(castle),
                       ),
                     ),
+                    Positioned(
+                      bottom: 10,
+                      left: 180,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.sms,
+                          color: Colors.amber,
+                        ),
+                        onPressed: (){
+                          DatabaseHelper.sendSMS("0096891711554", "I would like to book a visit to the ""${castle.castleData!.name} castle.", context);
+                        },
+                      ),
+                    )
                   ],
                 ),
 
