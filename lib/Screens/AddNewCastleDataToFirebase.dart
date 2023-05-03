@@ -18,6 +18,8 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
   final placeController = TextEditingController();
   final yearEstablishedController = TextEditingController();
   final ticketPriceController = TextEditingController();
+  final latitudeController = TextEditingController();
+  final longitudeController = TextEditingController();
 
   final GlobalKey<ScaffoldMessengerState> _scafoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -34,6 +36,8 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
       placeController.text = castle!.castleData!.place ?? "";
       yearEstablishedController.text = castle!.castleData!.yearEstablished.toString() ?? "";
       ticketPriceController.text = castle!.castleData!.toString() ?? "" ;
+      latitudeController.text = castle!.castleData!.latitude?.toString()?? "";
+      longitudeController.text = castle!.castleData!.longitude?.toString() ?? "";
 
     }
     return MaterialApp(
@@ -74,6 +78,18 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
                     decoration:
                     const InputDecoration(labelText: 'Ticket Price'),
                   ),
+                  TextField(
+                    controller: latitudeController,
+                    keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                    decoration: const InputDecoration(labelText: 'Latitude'),
+                  ),
+                  TextField(
+                    controller: longitudeController,
+                    keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                    decoration: const InputDecoration(labelText: 'Longitude'),
+                  ),
                   ElevatedButton(
                     child: const Text('Save'),
                     onPressed: () {
@@ -83,6 +99,8 @@ class AddNewCastleDataToFirebase extends StatelessWidget{
                         placeController.text,
                         int.parse(yearEstablishedController.text),
                         double.parse(ticketPriceController.text),
+                        double.parse(latitudeController.text),
+                        double.parse(longitudeController.text),
                       );
                       if (isUpdate && castle != null) {
                         DatabaseHelper.updateCastleData(

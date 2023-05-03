@@ -8,8 +8,9 @@ class AppFortDecoration extends StatelessWidget {
   final Castle castle;
   final Function (Castle, bool) onUpdateCastle;
   final Function(String key) onDelete;
+  final Function(Castle) onShowMap;
 
-  const AppFortDecoration({Key? key, required this.castle, required this.onUpdateCastle, required this.onDelete}) : super(key: key);
+  const AppFortDecoration({Key? key, required this.castle, required this.onUpdateCastle, required this.onDelete, required this.onShowMap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +99,18 @@ class AppFortDecoration extends StatelessWidget {
                         ),
                         onPressed: ()=> onDelete(castle.key!),
                       ),
-                    )
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      left: 150,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.map,
+                          color: Colors.purple,
+                        ),
+                        onPressed: ()=> onShowMap(castle),
+                      ),
+                    ),
                   ],
                 ),
 

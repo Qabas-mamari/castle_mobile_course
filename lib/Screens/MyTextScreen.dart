@@ -1,4 +1,5 @@
 import 'package:castle_mobile_course/Data/DatabaseHelper.dart';
+import 'package:castle_mobile_course/Screens/MapScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -57,6 +58,13 @@ class _MyTextScreenState extends State<MyTextScreen> {
         )
       );
     }
+  }
+
+  void _handleShowCastle(Castle castle){
+    Navigator.push(context,
+    MaterialPageRoute(
+      builder: (context) => MapScreen(castle: castle)
+    ));
   }
   @override
   void initState(){
@@ -156,7 +164,8 @@ class _MyTextScreenState extends State<MyTextScreen> {
                           AppFortDecoration(
                               castle: castleList[i],
                               onUpdateCastle: widget.onUpdateCastle,
-                              onDelete: _handleDeleteCastle
+                              onDelete: _handleDeleteCastle,
+                            onShowMap: _handleShowCastle,
                           )
                     ],
                     //  fortList.map((castle)=>AppFortDecoration(fort: castle,)).toList(),

@@ -12,9 +12,11 @@ class CastleData{
   String?place;
   int? yearEstablished;
   double? ticketPrice;
+  double? latitude;
+  double? longitude;
 
 
-  CastleData(this.image, this.name, this.place, this.yearEstablished, this.ticketPrice);
+  CastleData(this.image, this.name, this.place, this.yearEstablished, this.ticketPrice, this.latitude, this.longitude);
 
   //read data from firebase
   CastleData.fromJson(Map<dynamic, dynamic> json){
@@ -23,6 +25,8 @@ class CastleData{
     place = json["place"];
     yearEstablished = checkInteger(json["established"]);
     ticketPrice = checkDouble(json["ticket_price"]);
+    latitude = checkDouble(json['latitude']);
+    longitude = checkDouble(["longitude"]);
   }
 
   //read data to firebase
@@ -32,7 +36,9 @@ class CastleData{
       "name": name,
       "place": place,
       "established": yearEstablished,
-      "ticket_price": ticketPrice
+      "ticket_price": ticketPrice,
+      "latitude": latitude,
+      "longitude": longitude,
     };
   }
 
